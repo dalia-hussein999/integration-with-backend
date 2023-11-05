@@ -5,3 +5,16 @@ export const axiosInstance = axios.create({
     "Content-Type": "Application/json",
   },
 });
+axiosInstance.interceptors.request.use(
+  config => {
+  
+    const token = "TOKEN";
+    if (token) {
+      config.headers['Authorization'] = 'Bearer ' + token;
+    }
+    return config;
+  },
+  error => {
+    Promise.reject(error);
+  }
+);
